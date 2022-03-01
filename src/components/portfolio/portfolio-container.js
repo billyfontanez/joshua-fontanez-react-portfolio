@@ -6,21 +6,59 @@ export default class PortfolioContainer extends Component {
   constructor() {
     super();
 
-    console.log("Portfolio container has rendered");
+    this.state = {
+      pageTitle: "Welcome to my portfolio",
+      isLoading: false,
+      data: [
+        {title:'Published Work',
+        category:['Resume'||'CV']
+        }, 
+        {title: 'Certificates',
+        category:'Resume'
+        }, 
+        {title:'About',
+        category:'Resume'
+        }, 
+        {title: 'Headline',
+        category:'Resume'
+        }, 
+        {title:'Education',
+        category:['Resume'||'CV']
+        }, 
+        {title:'Volunteering',
+        category:'Resume'
+        }
+      ]
+    };
+
+    this.handleFilter = this.handleFilter.bind(this);
+  }
+
+  handleFilter(filter) {
+    this.setState({
+      data: this.state.data.filter(item => {
+        return item.category === filter;
+      })
+    });
   }
 
   portfolioItems(){
-    const data = ['CV', 'Resume', 'About', 'Headline','Education','Volunteering']
-
-    return data.map(item=>{
-      return <PortfolioItem />
+    return this.state.data.map(item=>{
+      return <PortfolioItem title={item.title} url={'google.com'} />;
     })
   }
 
   render() {
+    if (this.state.isLoading){
+      return <div>Loading...</div>
+    }
+
     return (
       <div>
-        <h2>Portfolio items go here updated...</h2>
+        <h2>{this.state.pageTitle}</h2>
+
+        <button onClick={() => this.handleFilter('Resume')}>Resume</button>
+        <button onClick={() => this.handleFilter('CV' )}>CV</button>
 
         {this.portfolioItems()}
       </div>
