@@ -11,22 +11,24 @@ export default class PortfolioContainer extends Component {
       isLoading: false,
       data: [
         {title:'Published Work',
-        category:['Resume'||'CV']
+        category:['Resume','CV'],
+        slug:'published-work'
         }, 
         {title: 'Certificates',
-        category:'Resume'
-        }, 
-        {title:'About',
-        category:'Resume'
+        category:'Resume',
+        slug:'certificates'
         }, 
         {title: 'Headline',
-        category:'Resume'
+        category:'Resume',
+        slug: 'headline'
         }, 
         {title:'Education',
-        category:['Resume'||'CV']
+        category:['Resume','CV'],
+        slug:'education'
         }, 
         {title:'Volunteering',
-        category:'Resume'
+        category:'Resume',
+        slug:'volunteering'
         }
       ]
     };
@@ -44,7 +46,7 @@ export default class PortfolioContainer extends Component {
 
   portfolioItems(){
     return this.state.data.map(item=>{
-      return <PortfolioItem title={item.title} url={'google.com'} />;
+      return <PortfolioItem title={item.title} url={'google.com'} slug={item.slug}/>;
     })
   }
 
